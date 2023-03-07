@@ -17,16 +17,10 @@ The macro-are which the topics belong to are the following ones:
 The programming languages that will be used for the implementation are:
 
 - `Python`
-
 - `C++`
-
 - `JavaScript`
 
-
-
 > Additional areas and programming languages could be integrated in the future.
-
-
 
 Last but not the least, this is also a first attempt for haring a public repo to the world.
 
