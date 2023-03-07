@@ -81,3 +81,86 @@ If there are two middle nodes, return the second middle node.
         return slow;
     }
 ```
+
+## Sort Array by Parity II
+
+```cpp
+vector<int> sortArrayByParityII(vector<int>& nums) {
+    int n=nums.size();
+    int i=0,j=n-1;
+    while(i<n){
+        while(i<n&&nums[i]%2==0) i+=2;
+        if(i==n) break;
+        while(j>=0&&nums[j]%2!=0) j-=2;
+        swap(nums[i],nums[j]);
+    }
+    return nums;
+}
+```
+
+## Reverse String
+
+```cpp
+void reverseString(vector<char>& s) {
+    int i = 0;
+    int n = s.size();
+    while(i < n/2) {
+        swap(s[i], s[n-1-i]);
+        i ++;
+    }
+}
+```
+
+## Valid Palindrome
+
+- [ ] TODO: more details about the method `s.erase(std::remove_if(s.begin(), s.end(), my_predicate), s.end());` [link](https://stackoverflow.com/questions/6319872/how-to-strip-all-non-alphanumeric-characters-from-a-string-in-c)
+
+```cpp
+bool isPalindrome(string s) {
+    int i=0;
+    s.erase(std::remove_if(s.begin(), s.end(), []( auto const& c ) -> bool { return !std::isalnum(c); } ), s.end());
+    cout << s << endl;
+    if(s.size()==0) return true;
+    while(i<s.size()/2) {
+        if(tolower(s[i]) != tolower(s[s.size()-1-i])) return false;
+        i++;
+    }
+    return true;
+}
+```
+
+## Sort Colors
+
+Given an array iwth 0, 1, and 2 sort it in ascending order.
+
+Example: `nums = [2,0,2,1,1,0] -> [0,0,1,1,2,2]`
+
+Most efficient solution from the time-consuming point of view:
+
+```cpp
+void sortColors(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+}
+```
+
+Same time efficiency with less memory consumption:
+
+```cpp
+void sortColors(vector<int>& nums) {
+    int i=0, i1=0, n=nums.size()-1;
+    while(i1 <= n) {
+        if(nums[i1] == 0) {
+            swap(nums[i], nums[i1]);
+            i++;
+            i1++;
+            }
+        else if (nums[i1]==1) {
+            i1++;
+        }
+        else {
+            swap(nums[i1], nums[n]);
+            n--;
+        }
+    }
+}
+```
