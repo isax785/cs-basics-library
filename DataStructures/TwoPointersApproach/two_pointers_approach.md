@@ -164,3 +164,62 @@ void sortColors(vector<int>& nums) {
     }
 }
 ```
+
+## Container With Most Water
+
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Constraints:
+
+```
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+```
+
+```cpp
+int maxArea(vector<int>& height) {
+
+    int amount=0;
+    int left=0, right=height.size()-1;
+    while(left < right) {
+        amount = max((right-left) * min(height[left], height[right]), amount);
+        if(height[left] >= height[right]) right--;
+        else left++;
+    }
+    return amount;
+    
+}
+```
+Example:
+> Input: height = [1,8,6,2,5,4,8,3,7]
+> Output: 49
+
+Optimized solution (to be further investigated):
+
+```cpp
+int ans = 0, l = 0, r = n - 1, i = 0, j = s.length() - 1, x, y;
+bool read_l = true, read_r = true;
+while (l < r) {
+    if (read_l) {
+        read_l = false;
+        ++i;
+        x = s[i++] & 15;
+        while ((s[i] & 15) < 10) x = x * 10 + (s[i++] & 15);
+    }
+    if (read_r) {
+        read_r = false;
+        for (j -= 2; (s[j] & 15) < 10; --j);
+        int k = j + 1;
+        y = s[k++] & 15;
+        while ((s[k] & 15) < 10) y = y * 10 + (s[k++] & 15);
+    }
+    ans = max(ans, min(x, y) * (r - l));
+    if (x < y) ++l, read_l = true;
+    else --r, read_r = true;
+return ans;
+```    
+
+
