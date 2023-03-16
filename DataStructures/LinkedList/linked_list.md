@@ -81,5 +81,41 @@ Solution:
         
         return ans;
     }
-};
 ```
+
+## Merge k Sorted Linked Lists
+
+Slow solution:
+
+```cpp
+ListNode* mergeKLists(vector<ListNode*>& lists) {
+    ListNode* current = new ListNode(0);
+    ListNode* head = current;
+    int n = lists.size();
+    int val, val_min, index;
+    while(true) {
+        val_min = VAL_MIN;
+        for(int i=0; i<n;i++) {
+            if(lists[i]) {
+                val = lists[i]->val;
+                if(val < val_min) {
+                    val_min = val;
+                    index = i;
+                }
+            }
+        }
+        if (val_min == VAL_MIN) break;
+        else {
+            current->next = lists[index];
+            lists[index] = lists[index]->next;
+            current = current->next;
+        }
+    }
+    return head->next;
+}
+```
+
+Other possible solutions:
+
+- merge two lists each iteration until the comprehensive list is empty
+- store all the node values in a list (or queue, advantages?), sort them, and build the merged ordered list
