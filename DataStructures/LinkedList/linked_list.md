@@ -119,3 +119,17 @@ Other possible solutions:
 
 - merge two lists each iteration until the comprehensive list is empty
 - store all the node values in a list (or queue, advantages?), sort them, and build the merged ordered list
+
+## Intersection of Two Linked Lists
+
+Find the intersection node of two linked list. If they never intersect, return `null`.
+
+```python
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        l1, l2 = headA, headB
+        while l1 != l2:
+            l1 = l1.next if l1 else headB
+            l2 = l2.next if l2 else headA
+        return l1
+```
